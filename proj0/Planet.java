@@ -62,10 +62,10 @@ public class Planet {
                 total_force_x += calcForceExertedByX(i);
             }
         }
-        if (total_force_X > 0) {
-            return total_force_X;
+        if (total_force_x > 0) {
+            return total_force_x;
         }else {
-            return -1 * total_force_X;
+            return -1 * total_force_x;
         }
     }
 
