@@ -62,7 +62,11 @@ public class Planet {
                 total_force_x += calcForceExertedByX(i);
             }
         }
-        return total_force_x;
+        if (total_firce_x > 0) {
+            return total_force_x;
+        }else {
+            return -1 * total_force_x;
+        }
     }
 
     public double calcNetForceExertedByY(Planet[] p) {
@@ -72,7 +76,11 @@ public class Planet {
                 total_force_Y += calcForceExertedByY(i);
             }
         }
-        return total_force_Y;
+        if (total_firce_y > 0) {
+            return total_force_y;
+        }else {
+            return -1 * total_force_y;
+        }
     }
 
     public void update(double dt, double fx, double fy) {
