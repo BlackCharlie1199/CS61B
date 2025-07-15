@@ -45,14 +45,22 @@ public class Planet {
         double distance = calcDistance(p);
         double dx = xxPos - p.xxPos;
         double force_x = calcForceExertedBy(p) * dx / distance;
-        return force_x;
+        if (force_x > 0) {
+            return force_x;
+        }else {
+            return -1 * force_x;
+        }
     }
 
     public double calcForceExertedByY(Planet p) {
         double distance = calcDistance(p);
         double dy = yyPos - p.yyPos;
         double force_y = calcForceExertedBy(p) * dy / distance;
-        return force_y;
+        if (force_y > 0) {
+            return force_y;
+        } else {
+            return -1 * force_y;
+        }
     }
 
     public double calcNetForceExertedByX(Planet[] p) {
@@ -62,11 +70,7 @@ public class Planet {
                 total_force_x += calcForceExertedByX(i);
             }
         }
-        //if (total_force_x > 0) {
         return total_force_x;
-        //}else {
-        //   return -1 * total_force_x;
-        //}
     }
 
     public double calcNetForceExertedByY(Planet[] p) {
@@ -76,11 +80,7 @@ public class Planet {
                 total_force_Y += calcForceExertedByY(i);
             }
         }
-        if (total_force_Y > 0) {
-            return total_force_Y;
-        }else {
-            return -1 * total_force_Y;
-        }
+        return total_force_Y;
     }
 
     public void update(double dt, double fx, double fy) {
