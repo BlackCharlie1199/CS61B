@@ -1,5 +1,5 @@
 public class Planet {
-    public static double constant_G = 6.67e-11;
+    public static final double constant_G = 6.67e-11;
     public double xxPos;
     public double yyPos;
     public double xxVel;
