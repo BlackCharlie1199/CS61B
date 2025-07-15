@@ -62,11 +62,11 @@ public class Planet {
                 total_force_x += calcForceExertedByX(i);
             }
         }
-        if (total_force_x > 0) {
-            return total_force_x;
-        }else {
-            return -1 * total_force_x;
-        }
+        //if (total_force_x > 0) {
+        return total_force_x;
+        //}else {
+        //   return -1 * total_force_x;
+        //}
     }
 
     public double calcNetForceExertedByY(Planet[] p) {
