@@ -18,7 +18,7 @@ public class ArrayDeque<T>{
             resize(size * 2);
         }
         item[lastIndex] = x;
-        lastIndex = lastIndex + 1;
+        lastIndex = (lastIndex + 1) % item.length;
         size += 1;
     }
 
@@ -56,7 +56,7 @@ public class ArrayDeque<T>{
         return size;
     }
 
-    public void resize(int resize) {
+    private void resize(int resize) {
         T[] a = (T[]) new Object[resize];
         for (int i = 0; i < size; i++) {
             int index = (firstIndex + i + 1) % size;
@@ -77,5 +77,25 @@ public class ArrayDeque<T>{
             System.out.print(item[index]);
             System.out.print(" ");
         }
+    }
+    public static void main(String[] args) {
+        ArrayDeque<Integer> a = new ArrayDeque<>();
+        a.addLast(0);
+        a.addLast(1);
+        a.addLast(2);
+        a.addLast(3);
+        System.out.println(a.removeFirst());
+        a.printDeque();
+        System.out.println();
+        a.addLast(5);
+        a.addLast(6);
+        a.addLast(7);
+        System.out.println(a.removeFirst());
+        a.printDeque();
+        System.out.println();
+        System.out.println(a.size);
+        a.addLast(10);
+        a.addLast(11);
+        a.printDeque();
     }
 }
