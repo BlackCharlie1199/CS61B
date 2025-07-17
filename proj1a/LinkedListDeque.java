@@ -5,7 +5,6 @@ public class LinkedListDeque<T> {
     private class node {
         /** Create the node of list s.t. we don't need to
          *  understand how linked list is worked when we call LinkedListDeque
-         *  : D
          */
         public T item;
         public node nextNode;
@@ -97,6 +96,12 @@ public class LinkedListDeque<T> {
 
     /* use recursion */
     public T getRecursive(int index) {
-        return sentinel.nextNode.findRecursive(index);
+        if (index == 0) {
+            return get(0);
+        }
+        T x = removeFirst();
+        T result = getRecursive(index - 1);
+        addFirst(x);
+        return result;
     }
 }

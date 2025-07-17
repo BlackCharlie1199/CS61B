@@ -66,7 +66,10 @@ public class ArrayDeque<T>{
         firstIndex = item.length - 1;
         lastIndex = size;
     }
-    /*
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
 
     public void printDeque() {
         for(int i = 0; i < size; i++) {
@@ -74,18 +77,5 @@ public class ArrayDeque<T>{
             System.out.print(item[index]);
             System.out.print(" ");
         }
-        System.out.print(String.format("\nThe value of first index is %d", firstIndex));
-        System.out.println(String.format("\nThe value of last index is %d", lastIndex));
     }
-
-    public static void main(String[] args){
-        ArrayDeque<Integer> a = new ArrayDeque<>();
-        a.addLast(8);
-        a.addLast(3);
-        a.addLast(8);
-        System.out.println(a.removeFirst());
-        a.printDeque();
-    }
-
-     */
 }
