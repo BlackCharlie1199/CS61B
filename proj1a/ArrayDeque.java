@@ -36,6 +36,10 @@ public class ArrayDeque<T>{
         lastIndex = (lastIndex - 1 + item.length) % item.length;
         item[lastIndex] = null;
         size = Math.max(size-1, 0);
+
+        if (item.length / size >= 4) {
+            resize(size);
+        }
         return x;
     }
 
@@ -44,6 +48,10 @@ public class ArrayDeque<T>{
         firstIndex = (firstIndex + 1) % item.length;
         item[firstIndex] = null;
         size = Math.max(size-1, 0);
+
+        if (item.length / size >= 4) {
+            resize(size);
+        }
         return x;
     }
 
@@ -77,25 +85,5 @@ public class ArrayDeque<T>{
             System.out.print(item[index]);
             System.out.print(" ");
         }
-    }
-    public static void main(String[] args) {
-        ArrayDeque<Integer> a = new ArrayDeque<>();
-        a.addLast(0);
-        a.addLast(1);
-        a.addLast(2);
-        a.addLast(3);
-        System.out.println(a.removeFirst());
-        a.printDeque();
-        System.out.println();
-        a.addLast(5);
-        a.addLast(6);
-        a.addLast(7);
-        System.out.println(a.removeFirst());
-        a.printDeque();
-        System.out.println();
-        System.out.println(a.size);
-        a.addLast(10);
-        a.addLast(11);
-        a.printDeque();
     }
 }
