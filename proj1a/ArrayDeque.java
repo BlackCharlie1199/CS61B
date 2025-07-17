@@ -32,23 +32,24 @@ public class ArrayDeque<T>{
     }
 
     public T removeLast() {
+        T x = get(size - 1);
         lastIndex = (lastIndex - 1 + item.length) % item.length;
         item[lastIndex] = null;
-        T x = get(lastIndex);
-        size -= 1;
+        size = Math.max(size-1, 0);
         return x;
     }
 
     public T removeFirst() {
+        T x = get(0);
         firstIndex = (firstIndex + 1) % item.length;
         item[firstIndex] = null;
-        T x = get(firstIndex);
-        size -= 1;
+        size = Math.max(size-1, 0);
         return x;
     }
 
     public T get(int index){
-        return item[index];
+        int realIndex = (firstIndex + index + 1) % item.length;
+        return item[realIndex];
     }
 
     public int size() {
@@ -65,8 +66,8 @@ public class ArrayDeque<T>{
         firstIndex = item.length - 1;
         lastIndex = size;
     }
-
     /*
+
     public void printDeque() {
         for(int i = 0; i < size; i++) {
             int index = (firstIndex + i + 1) % item.length;
@@ -82,13 +83,9 @@ public class ArrayDeque<T>{
         a.addLast(8);
         a.addLast(3);
         a.addLast(8);
-        a.addLast(8);
-        a.addLast(8);
-        a.addLast(8);
-        a.addLast(3);
-        a.addLast(4);
-        a.addLast(5);
+        System.out.println(a.removeFirst());
         a.printDeque();
     }
-    */
+
+     */
 }

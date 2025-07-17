@@ -2,7 +2,7 @@ public class LinkedListDeque<T> {
     private int size;
     private node sentinel;
 
-    public class node {
+    private class node {
         /** Create the node of list s.t. we don't need to
          *  understand how linked list is worked when we call LinkedListDeque
          *  : D
@@ -35,13 +35,17 @@ public class LinkedListDeque<T> {
 
     /* Add a node at first position */
     public void addFirst (T item) {
-        sentinel.nextNode = new node(item, sentinel, sentinel.nextNode);
+        node newNode = new node(item, sentinel, sentinel.nextNode);
+        sentinel.nextNode.previousNode = newNode;
+        sentinel.nextNode = newNode;
         size += 1;
     }
 
     /* Add a node at last position */
     public void addLast (T item) {
-        sentinel.previousNode = new node(item, sentinel.previousNode, sentinel);
+        node newNode = new node(item, sentinel.previousNode, sentinel);
+        sentinel.previousNode.nextNode = newNode;
+        sentinel.previousNode = newNode;
         size += 1;
     }
 
@@ -51,7 +55,7 @@ public class LinkedListDeque<T> {
         sentinel.nextNode = firstNode.nextNode;
         sentinel.nextNode.previousNode = sentinel;
         firstNode = null;
-        size -= 1;
+        size = Math.max(size-1, 0);
         return x;
     }
 
@@ -61,7 +65,7 @@ public class LinkedListDeque<T> {
         sentinel.previousNode = lastNode.previousNode;
         sentinel.previousNode.nextNode = sentinel;
         lastNode = null;
-        size -= 1;
+        size = Math.max(size-1, 0);
         return x;
     }
     public boolean isEmpty() {
