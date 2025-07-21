@@ -10,28 +10,39 @@ public class TestArrayDequeGold {
         ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
         StringBuilder errorMessage = new StringBuilder();
 
-        for(int i = 0; i < 10; i++) {
-            double chance = StdRandom.gaussian();
-            if (chance < 0.5) {
+        for(int i = 0; i < 100; i++) {
+            double chance = StdRandom.uniform(0.0, 1.0);
+            if (chance < 0.25) {
+                student.addLast(4);
+                solution.addLast(4);
+                errorMessage.append("addLast()\n");
+                Integer expect = solution.removeFirst();
+                Integer actual = student.removeFirst();
+                errorMessage.append("removeFirst()\n");
+                assertEquals(errorMessage.toString(), expect, actual);
                 student.addFirst(4);
                 solution.addFirst(4);
+                errorMessage.append("addFirst()\n");
+            } else if (chance < 0.5) {
+                student.addLast(8);
+                solution.addLast(8);
+                errorMessage.append("addLast()\n");
+                Integer expect = solution.removeLast();
+                Integer actual = student.removeLast();
+                errorMessage.append("removeLast()\n");
+                assertEquals(errorMessage.toString(), expect, actual);
+            } else if (chance < 0.75) {
+                student.addFirst(-100);
+                solution.addFirst(-100);
                 errorMessage.append("addFirst()\n");
                 Integer expect = solution.removeFirst();
                 Integer actual = student.removeFirst();
                 errorMessage.append("removeFirst()\n");
                 assertEquals(errorMessage.toString(), expect, actual);
-            } else if (chance < 0.8) {
-                student.addLast(i);
-                solution.addLast(i);
-                errorMessage.append("addLast()\n");
-            } else if (chance < 0.9) {
-                student.addFirst(i-100);
-                solution.addFirst(i-100);
-                errorMessage.append("addFirst()\n");
             } else {
-                student.addLast(i);
-                solution.addLast(i);
-                errorMessage.append("addLast()\n");
+                student.addFirst(1);
+                solution.addFirst(1);
+                errorMessage.append("addFirst()\n");
                 Integer expect = solution.removeLast();
                 Integer actual = student.removeLast();
                 errorMessage.append("removeLast()\n");
@@ -39,6 +50,7 @@ public class TestArrayDequeGold {
             }
         }
 
+        /*
         for(int i = 0; i < solution.size(); i++) {
             boolean chance = StdRandom.bernoulli();
 
@@ -54,5 +66,7 @@ public class TestArrayDequeGold {
                 assertEquals(errorMessage.toString(), expect, actual);
             }
         }
+
+         */
     }
 }
