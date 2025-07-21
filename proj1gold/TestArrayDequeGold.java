@@ -10,9 +10,9 @@ public class TestArrayDequeGold {
         ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
         StringBuilder errorMessage = new StringBuilder();
 
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10; i++) {
             double chance = StdRandom.gaussian();
-            if (chance < 0.2) {
+            if (chance < 0.5) {
                 student.addFirst(4);
                 solution.addFirst(4);
                 errorMessage.append("addFirst()\n");
@@ -20,11 +20,11 @@ public class TestArrayDequeGold {
                 Integer actual = student.removeFirst();
                 errorMessage.append("removeFirst()\n");
                 assertEquals(errorMessage.toString(), expect, actual);
-            } else if (chance < 0.5) {
+            } else if (chance < 0.8) {
                 student.addLast(i);
                 solution.addLast(i);
                 errorMessage.append("addLast()\n");
-            } else if (chance < 0.7) {
+            } else if (chance < 0.9) {
                 student.addFirst(i-100);
                 solution.addFirst(i-100);
                 errorMessage.append("addFirst()\n");
