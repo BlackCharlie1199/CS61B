@@ -5,124 +5,53 @@ import org.junit.experimental.theories.suppliers.TestedOn;
 public class TestArrayDequeGold {
 
     @Test
-    public void testAddFirst() {
-        StudentArrayDeque<Integer> student = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-
-        for(int i = 0; i < 10; i++) {
-            student.addFirst(i);
-            solution.addFirst(i);
-        }
-
-        for(int i = 0; i < 10; i++) {
-            assertEquals(solution.removeFirst(), student.removeFirst());
-        }
-    }
-
-    @Test
-    public void testAddLast() {
-        StudentArrayDeque<Integer> student = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-
-        for(int i = 0; i < 10; i++) {
-            student.addLast(i);
-            solution.addLast(i);
-        }
-
-        for(int i = 0; i < 10; i++) {
-            assertEquals(solution.removeFirst(), student.removeFirst());
-        }
-    }
-
-    @Test
-    public void testAddLastFirst() {
-        StudentArrayDeque<Integer> student = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-
-        for(int i = 0; i < 10; i++) {
-            boolean randomChance = StdRandom.bernoulli((float)1 / 3); // The success possibilities is 1/2 by default.
-            if (randomChance) {
-                student.addFirst(i);
-                solution.addFirst(i);
-            } else {
-                student.addLast(i);
-                solution.addLast(i);
-            }
-        }
-
-        for(int i = 0; i < 10; i++) {
-            assertEquals(solution.removeFirst(), student.removeFirst());
-        }
-    }
-
-    @Test
-    public void testRemoveFirst() {
-        StudentArrayDeque<Integer> student = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-
-        for(int i = 0; i < 10; i++) {
-            boolean randomChance = StdRandom.bernoulli(); // The success possibilities is 1/2 by default.
-            if (randomChance) {
-                student.addFirst(i);
-                solution.addFirst(i);
-            } else {
-                student.addLast(i);
-                solution.addLast(i);
-            }
-            if (randomChance) {
-                assertEquals(solution.removeLast(), student.removeLast());
-            }
-        }
-        for(int i = 0; i < solution.size(); i++) {
-            assertEquals(solution.removeLast(), student.removeLast());
-        }
-    }
-    @Test
-    public void testRemoveLast() {
-        StudentArrayDeque<Integer> student = new StudentArrayDeque<>();
-        ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-        String errorMessage = "";
-
-        for(int i = 0; i < 10; i++) {
-                student.addLast(i);
-                solution.addLast(i);
-                errorMessage += "addLast()\n";
-        }
-
-        for(int i = 0; i < 10; i++) {
-            errorMessage += "removeLast()\n";
-            assertEquals(errorMessage, solution.removeLast(), student.removeLast());
-        }
-    }
-
-    @Test
     public void testRemoveLastFirst() {
         StudentArrayDeque<Integer> student = new StudentArrayDeque<>();
         ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
-        String errorMessage = "";
+        StringBuilder errorMessage = new StringBuilder();
 
-        for(int i = 0; i < 10; i++) {
-            boolean randomChance = StdRandom.bernoulli(); // The success possibilities is 1/2 by default.
-            if (randomChance) {
-                student.addFirst(i);
-                solution.addFirst(i);
-                errorMessage += "addLast()\n";
+        for(int i = 0; i < 100; i++) {
+            double chance = StdRandom.gaussian();
+            if (chance < 0.2) {
+                student.addFirst(4);
+                solution.addFirst(4);
+                errorMessage.append("addFirst()\n");
+                Integer expect = solution.removeFirst();
+                Integer actual = student.removeFirst();
+                errorMessage.append("removeFirst()\n");
+                assertEquals(errorMessage.toString(), expect, actual);
+            } else if (chance < 0.5) {
+                student.addLast(i);
+                solution.addLast(i);
+                errorMessage.append("addLast()\n");
+            } else if (chance < 0.7) {
+                student.addFirst(i-100);
+                solution.addFirst(i-100);
+                errorMessage.append("addFirst()\n");
             } else {
                 student.addLast(i);
                 solution.addLast(i);
-                errorMessage += "addLast()\n";
+                errorMessage.append("addLast()\n");
+                Integer expect = solution.removeLast();
+                Integer actual = student.removeLast();
+                errorMessage.append("removeLast()\n");
+                assertEquals(errorMessage.toString(), expect, actual);
             }
         }
 
-        for(int i = 0; i < 10; i++) {
-            boolean randomChance = StdRandom.bernoulli((float) 1 / 5); // The success possibilities is 1/2 by default.
+        for(int i = 0; i < solution.size(); i++) {
+            boolean chance = StdRandom.bernoulli();
 
-            if (randomChance) {
-                errorMessage += "removeFirst()\n";
-                assertEquals(errorMessage, solution.removeFirst(), student.removeFirst());
+            if (chance) {
+                Integer expect = solution.removeFirst();
+                Integer actual = student.removeFirst();
+                errorMessage.append("removeFirst()\n");
+                assertEquals(errorMessage.toString(), expect, actual);
             } else {
-                errorMessage += "removeLast()\n";
-                assertEquals(errorMessage, solution.removeLast(), student.removeLast());
+                Integer expect = solution.removeLast();
+                Integer actual = student.removeLast();
+                errorMessage.append("removeLast()\n");
+                assertEquals(errorMessage.toString(), expect, actual);
             }
         }
     }
