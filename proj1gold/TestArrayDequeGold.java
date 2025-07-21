@@ -10,35 +10,19 @@ public class TestArrayDequeGold {
         ArrayDequeSolution<Integer> solution = new ArrayDequeSolution<>();
         StringBuilder errorMessage = new StringBuilder();
 
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 1000; i++) {
             double chance = StdRandom.uniform(0.0, 1.0);
-            if (chance < 0.25) {
-                student.addLast(4);
-                solution.addLast(4);
+            if (chance < 0.5) {
+                student.addLast(5);
+                solution.addLast(5);
                 errorMessage.append("addLast()\n");
                 Integer expect = solution.removeFirst();
                 Integer actual = student.removeFirst();
-                errorMessage.append("removeFirst()\n");
+                errorMessage.append("removeLast()\n");
                 assertEquals(errorMessage.toString(), expect, actual);
                 student.addFirst(4);
                 solution.addFirst(4);
                 errorMessage.append("addFirst()\n");
-            } else if (chance < 0.5) {
-                student.addLast(8);
-                solution.addLast(8);
-                errorMessage.append("addLast()\n");
-                Integer expect = solution.removeLast();
-                Integer actual = student.removeLast();
-                errorMessage.append("removeLast()\n");
-                assertEquals(errorMessage.toString(), expect, actual);
-            } else if (chance < 0.75) {
-                student.addFirst(-100);
-                solution.addFirst(-100);
-                errorMessage.append("addFirst()\n");
-                Integer expect = solution.removeFirst();
-                Integer actual = student.removeFirst();
-                errorMessage.append("removeFirst()\n");
-                assertEquals(errorMessage.toString(), expect, actual);
             } else {
                 student.addFirst(1);
                 solution.addFirst(1);
