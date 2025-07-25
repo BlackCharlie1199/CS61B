@@ -14,7 +14,7 @@ public class TestWorldGenerator {
         MapParameterGenerator mpg= new MapParameterGenerator(randomNum);
 
         ter.initialize(mpg.WIDTH, mpg.HEIGHT);
-        WorldGenerator.generate(mpg);
-        ter.renderFrame(WorldGenerator.getWorld());
+        TETile[][] world = WorldGenerator.generate(mpg);
+        ter.renderFrame(world);
     }
 }

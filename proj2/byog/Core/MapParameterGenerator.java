@@ -20,7 +20,7 @@ public class MapParameterGenerator {
         RANDOM = new Random(randomNumber);
         WIDTH = 80;
         HEIGHT = 40;
-        roomNumber = Math.abs(RANDOM.nextInt()) % 10 + 4;
+        roomNumber = Math.abs(RANDOM.nextInt()) % 10 + 8;
         hallWayNumber = Math.abs(RANDOM.nextInt()) + roomNumber;
     }
 }
