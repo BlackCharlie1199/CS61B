@@ -33,6 +33,35 @@ public class Game {
         // drawn if the same inputs had been given to playWithKeyboard().
 
         TETile[][] finalWorldFrame = null;
+        long seed;
+        for(int i = 0; i < input.length(); i++) {
+            char charAtI = input.charAt(i);
+            if (charAtI == 'S') {
+                return finalWorldFrame;
+            } else if (charAtI == 'N') {
+                seed = getSeed(input, i + 1);
+                i += String.valueOf(seed).length();
+                MapParameterGenerator mpg = new MapParameterGenerator(seed);
+                finalWorldFrame = WorldGenerator.generate(mpg);
+            } else if (charAtI == 'Q') {
+                break;
+            } else {
+                break;
+            }
+        }
         return finalWorldFrame;
+    }
+
+    private long getSeed(String input, int index) {
+        StringBuilder s = new StringBuilder();
+        for(int i = index; i < input.length(); i++) {
+            char num = input.charAt(i);
+            if (num <= '9' && num >= '0') {
+                s.append(num);
+            } else {
+                break;
+            }
+        }
+        return Integer.parseInt(s.toString());
     }
 }
