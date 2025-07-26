@@ -11,10 +11,12 @@ public class TestWorldGenerator {
     public static void main(String[] args) {
         TERenderer ter = new TERenderer();
         long randomNum = StdRandom.uniform(12345567);
+        WorldStatus ws = new WorldStatus();
+
         MapParameterGenerator mpg= new MapParameterGenerator(randomNum);
 
         ter.initialize(mpg.WIDTH, mpg.HEIGHT);
-        TETile[][] world = WorldGenerator.generate(mpg);
-        ter.renderFrame(world);
+        ws.registerMap(mapGenerator.generate(mpg));
+        ter.renderFrame(ws.getWorld());
     }
 }

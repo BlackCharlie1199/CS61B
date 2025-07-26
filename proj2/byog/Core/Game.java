@@ -1,9 +1,12 @@
 package byog.Core;
 
+import byog.SaveDemo.World;
 import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 
-public class Game {
+import java.io.*;
+
+public class Game implements Serializable {
     TERenderer ter = new TERenderer();
     /* Feel free to change the width and height. */
     public static final int WIDTH = 80;
@@ -34,19 +37,23 @@ public class Game {
 
         TETile[][] finalWorldFrame = null;
         long seed;
+        WorldStatus ws = new WorldStatus();
+
         for(int i = 0; i < input.length(); i++) {
             char charAtI = input.charAt(i);
             if (charAtI == 'S') {
-                return finalWorldFrame;
+                saveWorld(ws);
             } else if (charAtI == 'N') {
                 seed = getSeed(input, i + 1);
                 i += String.valueOf(seed).length();
                 MapParameterGenerator mpg = new MapParameterGenerator(seed);
-                finalWorldFrame = WorldGenerator.generate(mpg);
+                ws.registerMap(mapGenerator.generate(mpg));
+                finalWorldFrame = ws.getWorld();
             } else if (charAtI == 'Q') {
                 break;
-            } else {
-                break;
+            } else if (charAtI == 'L'){
+                ws = loadWorld();
+                finalWorldFrame = ws.getWorld();
             }
         }
         return finalWorldFrame;
@@ -63,5 +70,48 @@ public class Game {
             }
         }
         return Integer.parseInt(s.toString());
+    }
+
+    private void saveWorld(WorldStatus ws) {
+        File f = new File("./saves/world.ser");
+        try {
+            if (!f.exists()) {
+                f.createNewFile();
+            }
+            FileOutputStream fs = new FileOutputStream(f);
+            ObjectOutputStream os = new ObjectOutputStream(fs);
+            os.writeObject(ws);
+            os.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(0);
+        }
+    }
+
+    private WorldStatus loadWorld() {
+        File f = new File("./saves/world.ser");
+        try {
+            if (f.exists()) {
+                FileInputStream fs = new FileInputStream(f);
+                ObjectInputStream os = new ObjectInputStream(fs);
+                WorldStatus loadWorld = (WorldStatus) os.readObject();
+                os.close();
+                return loadWorld;
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot find the save file!");
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println(e);
+            System.exit(0);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found!");
+            System.exit(0);
+        }
+
+        return new WorldStatus();
     }
 }

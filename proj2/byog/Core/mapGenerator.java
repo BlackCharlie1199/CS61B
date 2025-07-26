@@ -1,18 +1,15 @@
 package byog.Core;
 
-import byog.TileEngine.TERenderer;
 import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
-import byog.lab5.HexWorld;
 
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Random;
 
 /**
  * Generate a world based on the map parameter
  */
-public class WorldGenerator {
+public class mapGenerator {
     private static TETile[][] world;
     /* 
         I store the upper and lower bound of x and y in this linked list
