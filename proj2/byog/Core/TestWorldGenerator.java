@@ -18,5 +18,11 @@ public class TestWorldGenerator {
         ter.initialize(mpg.WIDTH, mpg.HEIGHT);
         ws.registerMap(mapGenerator.generate(mpg));
         ter.renderFrame(ws.getWorld());
+
+        mpg= new MapParameterGenerator(randomNum);
+
+        ter.initialize(mpg.WIDTH, mpg.HEIGHT);
+        ws.registerMap(mapGenerator.generate(mpg));
+        ter.renderFrame(ws.getWorld());
     }
 }

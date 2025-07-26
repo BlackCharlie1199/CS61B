@@ -25,6 +25,7 @@ public class mapGenerator {
      */
     public static TETile[][] generate(MapParameterGenerator mpg) {
         world = new TETile[mpg.WIDTH][mpg.HEIGHT];
+        roomPosition = new LinkedList<>();
         initialize(mpg);
         drawRoom(mpg);
         drawHallWays(mpg);
@@ -77,7 +78,6 @@ public class mapGenerator {
     private static void drawRoom(MapParameterGenerator mpg) {
         int i = 0;
         while(i < mpg.roomNumber) {
-            Random diff = new Random();
             int width = Math.abs(mpg.RANDOM.nextInt()) % 7 + 5;
             int height = Math.abs(mpg.RANDOM.nextInt()) % 10 + 4;
             int startX = Math.abs(mpg.RANDOM.nextInt()) % (mpg.WIDTH - width);
