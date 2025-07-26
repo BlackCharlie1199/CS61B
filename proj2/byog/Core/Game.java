@@ -38,11 +38,13 @@ public class Game implements Serializable {
         TETile[][] finalWorldFrame = null;
         long seed;
         WorldStatus ws = new WorldStatus();
+        input = input.toUpperCase();
 
         for(int i = 0; i < input.length(); i++) {
             char charAtI = input.charAt(i);
             if (charAtI == 'S') {
-                saveWorld(ws);
+                finalWorldFrame = ws.getWorld();
+                break;
             } else if (charAtI == 'N') {
                 seed = getSeed(input, i + 1);
                 i += String.valueOf(seed).length();
@@ -50,7 +52,7 @@ public class Game implements Serializable {
                 ws.registerMap(mapGenerator.generate(mpg));
                 finalWorldFrame = ws.getWorld();
             } else if (charAtI == 'Q') {
-                System.exit(0);
+                saveWorld(ws);
             } else if (charAtI == 'L'){
                 ws = loadWorld();
                 finalWorldFrame = ws.getWorld();
