@@ -50,7 +50,7 @@ public class Game implements Serializable {
                 ws.registerMap(mapGenerator.generate(mpg));
                 finalWorldFrame = ws.getWorld();
             } else if (charAtI == 'Q') {
-                break;
+                System.exit(0);
             } else if (charAtI == 'L'){
                 ws = loadWorld();
                 finalWorldFrame = ws.getWorld();
