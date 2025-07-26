@@ -53,6 +53,7 @@ public class Game implements Serializable {
                 finalWorldFrame = ws.getWorld();
             } else if (charAtI == 'Q') {
                 saveWorld(ws);
+                System.exit(0);
             } else if (charAtI == 'L'){
                 ws = loadWorld();
                 finalWorldFrame = ws.getWorld();
@@ -71,7 +72,7 @@ public class Game implements Serializable {
                 break;
             }
         }
-        return Integer.parseInt(s.toString());
+        return Long.parseLong(s.toString());
     }
 
     private void saveWorld(WorldStatus ws) {
