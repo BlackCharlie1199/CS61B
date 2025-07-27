@@ -38,8 +38,8 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
         if (this.fillCount == this.capacity) {
             throw new RuntimeException("Ring Buffer Overflow");
         }
-        this.last = (this.last + 1) % this.capacity;
         this.rb[this.last] = x;
+        this.last = (this.last + 1) % this.capacity;
         this.fillCount += 1;
     }
 
@@ -50,7 +50,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
      */
     public T dequeue() {
         // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
-        if (this.capacity == 0) {
+        if (this.fillCount == 0) {
             throw new RuntimeException("Ring Buffer Underflow");
         }
         T re = this.rb[this.first];
@@ -80,12 +80,12 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
         }
 
         public boolean hasNext() {
-            return index < fillCount;
+            return this.index < fillCount;
         }
 
         public T next() {
-            T returnValue = rb[index];
-            index += 1;
+            T returnValue = rb[this.index];
+            this.index += 1;
             return returnValue;
         }
     }

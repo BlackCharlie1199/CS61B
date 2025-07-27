@@ -51,7 +51,7 @@ public class GuitarString {
         //       Do not call StdAudio.play().
         double firstSample = this.buffer.dequeue();
         double secondSample = this.buffer.peek();
-        double newSample = DECAY * ((firstSample + secondSample) / 2);
+        double newSample = DECAY * (firstSample + secondSample) * 0.5;
         this.buffer.enqueue(newSample);;
     }
 
