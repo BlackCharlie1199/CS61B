@@ -64,6 +64,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
      */
     public T peek() {
         // TODO: Return the first item. None of your instance variables should change.
+        if (this.fillCount == 0) {
+            throw new RuntimeException("The Queue is empty");
+        }
         return this.rb[this.first];
     }
 
