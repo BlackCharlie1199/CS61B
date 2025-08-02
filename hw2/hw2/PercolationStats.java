@@ -16,14 +16,18 @@ public class PercolationStats {
         percolationThreshold = new double[T];
         for (int i = 0; i < T; i++) {
             Percolation grid = pf.make(N);
-            double leftGrid = N * N;
+            double openGrid = 0;
             while (!grid.percolates()) {
                 int randomRow = StdRandom.uniform(N);
                 int randomCol = StdRandom.uniform(N);
+                while (grid.isOpen(randomRow, randomCol)) {
+                    randomRow = StdRandom.uniform(N);
+                    randomCol = StdRandom.uniform(N);
+                }
                 grid.open(randomRow, randomCol);
-                leftGrid --;
+                openGrid++;
             }
-            percolationThreshold[i] = leftGrid / (N * N);
+            percolationThreshold[i] = openGrid / (N * N);
         }
     }
 
