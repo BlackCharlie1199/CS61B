@@ -70,7 +70,11 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        return this.siteGroup.connected(0, this.len * this.len + 1);
+        if (this.len != 1) {
+            return this.siteGroup.connected(0, this.len * this.len + 1);
+        } else {
+            return this.isFull(0,0);
+        }
     }
 
 
