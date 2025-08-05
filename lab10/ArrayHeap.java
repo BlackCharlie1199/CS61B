@@ -179,7 +179,9 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         swap(1, size);
         contents[size] = null;
         size -= 1;
-        sink(1);
+        if (size > 1) {
+            sink(1);
+        }
         return minValue;
     }
 
@@ -448,4 +450,25 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         }
     }
 
+    @Test
+    public void testInsertAndRemoveAllWithIncreasingPriority() {
+        ExtrinsicPQ<String> pq = new ArrayHeap<>();
+        pq.insert("a", 1);
+        pq.insert("b", 2);
+        pq.insert("c", 3);
+        pq.insert("c", 3);
+        pq.insert("d", 4);
+        pq.insert("d", 4);
+        pq.insert("e", 5);
+        pq.insert("g", 7);
+        pq.insert("h", 8);
+        pq.insert("i", 9);
+
+        int i = 0;
+        String[] expected = {"a", "b", "c", "c", "d", "d", "e", "g", "h", "i"};
+        while (pq.size() > 0) {
+            assertEquals(expected[i], pq.removeMin());
+            i += 1;
+        }
+    }
 }
